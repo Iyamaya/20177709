@@ -113,11 +113,18 @@ public class Sudoku {
                                     break;
                                 case "-m":
                                     m=Integer.parseInt(args[++i]);
+                                    if(m<3 || m>9){
+                                        System.out.println("m不是3-9的解决不了，退了再开");
+                                        System.exit(0);
+                                    }
                                     break;
                                 case "-n":
                                     n=Integer.parseInt(args[++i]);
+                                    if(n<0){
+                                        System.out.println("n小于0的解决不了，退了再开");
+                                        System.exit(0);
+                                    }
                                     break;
-
                                 default:
                                     break;
                             }
@@ -128,6 +135,10 @@ public class Sudoku {
         load(args);
         int[][] ShuDu =new int[10][10];
         File myFile = new File(inputFilename);
+        if(!myFile.exists()){
+            System.out.println("没有输入文件呢，准备好了再来吧");
+            System.exit(0);
+        }
         Reader reader = new InputStreamReader(new FileInputStream(myFile));
         int tempchar;
         int i=0;

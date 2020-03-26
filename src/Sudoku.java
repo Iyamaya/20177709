@@ -120,7 +120,7 @@ public class Sudoku {
                                     break;
                                 case "-n":
                                     n=Integer.parseInt(args[++i]);
-                                    if(n<0){
+                                    if(n<1){
                                         System.out.println("n小于0的解决不了，退了再开");
                                         System.exit(0);
                                     }

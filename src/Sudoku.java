@@ -18,40 +18,40 @@ public class Sudoku {
             }
         switch (l){                               //4、6、8、9阶判断宫
             case 4:
-                x = i / 2 * 2 + 2;                //x、y为宫坐标
-                y = j / 2 * 2 + 2;
-                for (int m = x; m < x; m++){
-                    for (int n = y; n < y; n++){
+                x = i / 2 * 2;                //x、y为宫坐标
+                y = j / 2 * 2;
+                for (int m = x; m < x + 2; m++){
+                    for (int n = y; n < y + 2; n++){
                         if (a[m][n] == k) {
                             return false;
                         }
                     }
                 }
             case 6:
-                x = i / 2 * 2 + 2;
-                y = j / 3 * 3 + 3;
-                for (int m = x; m < x; m++){
-                    for (int n = y; n < y; n++){
+                x = i / 2 * 2;
+                y = j / 3 * 3;
+                for (int m = x; m < x + 2; m++){
+                    for (int n = y; n < y + 3; n++){
                         if (a[m][n] == k) {
                             return false;
                         }
                     }
                 }
             case 8:
-                x = i / 4 * 4 + 4;
-                y = j / 2 * 2 + 2;
-                for (int m = x; m < x; m++){
-                    for (int n = y; n < y; n++){
+                x = i / 4 * 4;
+                y = j / 2 * 2;
+                for (int m = x; m < x + 4; m++){
+                    for (int n = y; n < y + 2; n++){
                         if (a[m][n] == k) {
                             return false;
                         }
                     }
                 }
             case 9:
-                x = i / 3 * 3 + 3;
-                y = j / 3 * 3 + 3;
-                for (int m = x; m < x; m++){
-                    for (int n = y; n < y; n++){
+                x = i / 3 * 3;
+                y = j / 3 * 3;
+                for (int m = x; m < x + 3; m++){
+                    for (int n = y; n < y + 3; n++){
                         if (a[m][n] == k) {
                             return false;
                         }
@@ -63,7 +63,7 @@ public class Sudoku {
     public static void sudoku(int[][] a, int n, int l) throws IOException {
         int [][] temp =new int[l][l];//l为阶数，几阶就是l*l
         for (int i = 0; i < temp.length; i++) {
-            System.arraycopy(a[i], 0, temp[i], 0, temp.length);//复制数组
+            System.arraycopy(a[i], 0, temp[i], 0, temp.length);//复制数组，形参传实参
         }
         int i = n / l;
         int j = n % l;

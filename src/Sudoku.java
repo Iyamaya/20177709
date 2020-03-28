@@ -5,6 +5,7 @@ public class Sudoku {
     public static int m;
     public static int n;
     public static boolean check(int[][] a, int i, int j, int k, int l) {
+        int x,y;
             for(int n = 0;n < l;n++) {        //列中有K返false
                 if(a[i][n] == k) {
                     return false;
@@ -15,49 +16,47 @@ public class Sudoku {
                     return false;
                 }
             }
-        if(l == 4) {                          //4、6、8、9阶判断宫
-            int x = i / 2 * 2;                //x、y为宫左上角坐标
-            int y = j / 2 * 2;
-            for (int m = x; m < x + 2; m++){
-                for (int n = y; n < y + 2; n++){
-                    if (a[m][n] == k) {
-                        return false;
+        switch (l){                               //4、6、8、9阶判断宫
+            case 4:
+                x = i / 2 * 2 + 2;                //x、y为宫坐标
+                y = j / 2 * 2 + 2;
+                for (int m = x; m < x; m++){
+                    for (int n = y; n < y; n++){
+                        if (a[m][n] == k) {
+                            return false;
+                        }
                     }
                 }
-            }
-        }
-        if(l == 6) {
-            int x = i / 2 * 2;
-            int y = j / 3 * 3;
-            for (int m = x; m < x + 2; m++){
-                for (int n = y; n < y + 3; n++){
-                    if (a[m][n] == k) {
-                        return false;
+            case 6:
+                x = i / 2 * 2 + 2;
+                y = j / 3 * 3 + 3;
+                for (int m = x; m < x; m++){
+                    for (int n = y; n < y; n++){
+                        if (a[m][n] == k) {
+                            return false;
+                        }
                     }
                 }
-            }
-        }
-        if(l == 8) {
-            int x = i / 4 * 4;
-            int y = j / 2 * 2;
-            for (int m = x; m < x + 4; m++){
-                for (int n = y; n < y + 2; n++){
-                    if (a[m][n] == k) {
-                        return false;
+            case 8:
+                x = i / 4 * 4 + 4;
+                y = j / 2 * 2 + 2;
+                for (int m = x; m < x; m++){
+                    for (int n = y; n < y; n++){
+                        if (a[m][n] == k) {
+                            return false;
+                        }
                     }
                 }
-            }
-        }
-        if(l == 9) {
-            int x = i / 3 * 3;
-            int y = j / 3 * 3;
-            for (int m = x; m < x + 3; m++){
-                for (int n = y; n < y + 3; n++){
-                    if (a[m][n] == k) {
-                        return false;
+            case 9:
+                x = i / 3 * 3 + 3;
+                y = j / 3 * 3 + 3;
+                for (int m = x; m < x; m++){
+                    for (int n = y; n < y; n++){
+                        if (a[m][n] == k) {
+                            return false;
+                        }
                     }
                 }
-            }
         }
         return true;
     }
@@ -113,14 +112,14 @@ public class Sudoku {
                                     break;
                                 case "-m":
                                     m=Integer.parseInt(args[++i]);
-                                    if(m<3 || m>9){
+                                    if(m < 3 || m > 9){
                                         System.out.println("m不是3-9的解决不了，退了再开");
                                         System.exit(0);
                                     }
                                     break;
                                 case "-n":
                                     n=Integer.parseInt(args[++i]);
-                                    if(n<1){
+                                    if(n < 1){
                                         System.out.println("n小于0的解决不了，退了再开");
                                         System.exit(0);
                                     }
@@ -128,13 +127,13 @@ public class Sudoku {
                                 default:
                                     break;
                             }
-            }
+             }
         }
     }
     public static void main(String[] args) throws IOException {
         load(args);
-        int[][] ShuDu =new int[10][10];
-        File myFile = new File(inputFilename);
+        int[][] ShuDu =new int[100][100];
+        File myFile = new File("C:\\Users\\MSI\\Desktop\\input9.txt");
         if(!myFile.exists()){
             System.out.println("没有输入文件呢，准备好了再来吧");
             System.exit(0);
@@ -144,7 +143,7 @@ public class Sudoku {
         int i=0;
         int j=0;
         while ((tempchar = reader.read()) != -1) {
-            if ( (((char) tempchar) != '\n') &&(((char) tempchar) != ' ')) {
+            if ( (((char) tempchar) != '\n') && (((char) tempchar) != ' ')) {
                 if(i<m){
                     if(j<m){
                         if(tempchar!=13){
@@ -158,7 +157,7 @@ public class Sudoku {
                     }
                 }
                 if(i==m){
-                    if(n!=0){
+                    if(0<n){
                         sudoku(ShuDu, 0,m);
                         i=0;
                         j=0;

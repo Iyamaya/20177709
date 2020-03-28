@@ -63,9 +63,9 @@ public class Sudoku {
     public static void sudoku(int[][] a, int n, int l) throws IOException {
         int [][] temp =new int[l][l];//l为阶数，几阶就是l*l
         for (int i = 0; i < temp.length; i++) {
-            System.arraycopy(a[i], 0, temp[i], 0, temp.length);//复制数组，形参传实参
+            System.arraycopy(a[i], 0, temp[i], 0, temp.length);//复制数组
         }
-        int i = n / l;
+        int i = n / l;             //行列
         int j = n % l;
         int z = l*l-1; //除去起点剩多少格子
         if (a[i][j] != 0) {
@@ -83,7 +83,7 @@ public class Sudoku {
         }
     }
     public static void print(int n, int l, int[][] temp, int z) throws IOException {
-        if (n == z) {
+        if (n == z) {//最后一个行列
             FileWriter out = new FileWriter(outputFilename);
             for (int[] ints : temp) {
                 for (int j1 = 0; j1 < temp.length; j1++) {

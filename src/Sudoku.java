@@ -6,16 +6,16 @@ public class Sudoku {
     public static int n;
     public static boolean check(int[][] a, int i, int j, int k, int l) {
         int x,y;
-            for(int n = 0;n < l;n++) {        //列中有K返false
-                if(a[i][n] == k) {
-                    return false;
-                }
+        for(int n = 0;n < l;n++) {        //列中有K返false
+            if(a[i][n] == k) {
+                return false;
             }
-            for (int m = 0; m < l; m++) {     //行中有K返false
-                if (a[m][j] == k) {
-                    return false;
-                }
+        }
+        for (int m = 0; m < l; m++) {     //行中有K返false
+            if (a[m][j] == k) {
+                return false;
             }
+        }
         switch (l){                               //4、6、8、9阶判断宫
             case 4:
                 x = i / 2 * 2;                //x、y为宫坐标
@@ -101,44 +101,46 @@ public class Sudoku {
         }
     }
     public static void load(String[] args){
-                    if(args.length>0){
-                        for(int i=0;i<args.length;i++){
-                            switch (args[i]) {
-                                case "-i":
-                                    inputFilename = args[++i];
-                                    break;
-                                case "-o":
-                                    outputFilename = args[++i];
-                                    break;
-                                case "-m":
-                                    m=Integer.parseInt(args[++i]);
-                                    if(m < 3 || m > 9){
-                                        System.out.println("m不是3-9的解决不了，退了再开");
-                                        System.exit(0);
-                                    }
-                                    break;
-                                case "-n":
-                                    n=Integer.parseInt(args[++i]);
-                                    if(n < 1){
-                                        System.out.println("n小于0的解决不了，退了再开");
-                                        System.exit(0);
-                                    }
-                                    break;
-                                default:
-                                    break;
-                            }
-             }
+        if(args.length>0){
+            for(int i=0;i<args.length;i++){
+                switch (args[i]) {
+                    case "-i":
+                        inputFilename = args[++i];
+                        break;
+                    case "-o":
+                        outputFilename = args[++i];
+                        break;
+                    case "-m":
+                        m=Integer.parseInt(args[++i]);
+                        if(m < 3 || m > 9){
+                            System.out.println("m不是3-9的解决不了，退了再开");
+                            System.exit(0);
+                        }
+                        break;
+                    case "-n":
+                        n=Integer.parseInt(args[++i]);
+                        if(n < 1){
+                            System.out.println("n小于0的解决不了，退了再开");
+                            System.exit(0);
+                        }
+                        break;
+                    default:
+                        break;
+                }
+            }
         }
     }
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args)  {
         load(args);
         int[][] ShuDu =new int[100][100];
-        File myFile = new File("C:\\Users\\MSI\\Desktop\\input9.txt");
+        File myFile = new File(inputFilename);
         if(!myFile.exists()){
             System.out.println("没有输入文件呢，准备好了再来吧");
             System.exit(0);
         }
-        Reader reader = new InputStreamReader(new FileInputStream(myFile));
+        Reader reader = null;
+        try {
+            reader = new InputStreamReader(new FileInputStream(myFile));
         int tempchar;
         int i=0;
         int j=0;
@@ -167,5 +169,8 @@ public class Sudoku {
             }
         }
         reader.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
